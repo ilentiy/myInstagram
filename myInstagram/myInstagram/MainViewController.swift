@@ -10,11 +10,26 @@ import UIKit
 /// Лента Инстаграма
 final class MainViewController: UIViewController {
     
+    // MARK: - Constants
+    private enum Constants {
+        static let storiesIdentifier = "Story"
+        static let postIdentifier = "Post"
+        static let recommendationIdentifier = "Recomend"
+    }
+    
+    private enum TableCellTypes {
+        case post
+        case startPost
+        case story
+        case recomend
+    }
+    
     // MARK: - Private IBOutlets
     @IBOutlet private weak var intagramTableView: UITableView!
     
     // MARK: - Private Property
-    private let refresher = UIRefreshControl()
+    private let refresherControl = UIRefreshControl()
+    private let tableCellTypes: [TableCellTypes] = [.story, .startPost, .recomend, .post]
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -24,35 +39,48 @@ final class MainViewController: UIViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        refresher.addTarget(self, action: #selector(refresherAction), for: .valueChanged)
-        intagramTableView.addSubview(refresher)
+        refresherControl.addTarget(self, action: #selector(refresherAction), for: .valueChanged)
+        intagramTableView.addSubview(refresherControl)
     }
     
     // MARK: - Private Actions
     @objc func refresherAction() {
-        refresher.endRefreshing()
+        refresherControl.endRefreshing()
     }
 }
 
 /// UITableViewDataSource
 extension MainViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        tableCellTypes.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        let type = tableCellTypes[section]
+        switch type {
+        case .story:
+            return 1
+        case .startPost:
+            return 1
+        case .recomend:
+            return 1
+        case .post:
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
-        switch indexPath.row {
-        case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Story", for: indexPath)
-        case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Recomend", for: indexPath)
-        default:
-            cell = tableView.dequeueReusableCell(withIdentifier: "Post", for: indexPath)
+        let type = tableCellTypes[indexPath.section]
+        switch type {
+        case .story:
+            cell = tableView.dequeueReusableCell(withIdentifier: Constants.storiesIdentifier, for: indexPath)
+        case .recomend:
+            cell = tableView.dequeueReusableCell(withIdentifier: Constants.recommendationIdentifier, for: indexPath)
+        case .post:
+            cell = tableView.dequeueReusableCell(withIdentifier: Constants.postIdentifier, for: indexPath)
+        case .startPost:
+            cell = tableView.dequeueReusableCell(withIdentifier: Constants.postIdentifier, for: indexPath)
         }
         return cell
     }
