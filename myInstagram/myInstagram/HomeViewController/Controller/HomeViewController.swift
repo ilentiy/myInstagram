@@ -8,7 +8,7 @@
 import UIKit
 
 /// Лента Инстаграма
-final class MainViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     // MARK: - Constants
     private enum Constants {
@@ -50,7 +50,7 @@ final class MainViewController: UIViewController {
 }
 
 /// UITableViewDataSource
-extension MainViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         tableCellTypes.count
     }
