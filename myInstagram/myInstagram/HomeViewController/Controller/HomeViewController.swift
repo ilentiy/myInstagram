@@ -27,8 +27,10 @@ final class HomeViewController: UIViewController {
     // MARK: - Private IBOutlets
     @IBOutlet private weak var intagramTableView: UITableView!
     
-    // MARK: - Private Property
+    // MARK: - Visual Component
     private let refresherControl = UIRefreshControl()
+    
+    // MARK: - Private Property
     private let tableCellTypes: [TableCellTypes] = [.story, .startPost, .recomend, .post]
     
     // MARK: - LifeCycle

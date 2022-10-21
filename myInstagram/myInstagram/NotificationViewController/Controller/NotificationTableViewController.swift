@@ -22,21 +22,34 @@ final class NotificationTableViewController: UITableViewController {
             static let ilentiy = "MyPhoto"
             static let ledenev = "ledenevAvatar"
             static let mem = "memAvatar"
+            static let ledenevContent = "ledenevContent1"
         }
+        
         enum HeadersText {
             static let today = "Сегодня "
             static let week = "На этой неделе "
             static let mounth = "В этом месяце "
             
         }
+        
         enum Identifiers {
             static let comment = "Comment"
             static let subscribe = "Subscribe"
         }
+        
         enum NickNames {
             static let ilentiy = "ilentiy"
             static let ledenev = "alex_ledenev"
             static let mem = "memolog"
+        }
+        
+        enum TimeStrings {
+            static let fiveHours = "5 ч."
+            static let threeHours = "3 ч."
+            static let nineHours = "9 ч."
+            static let twoDays = "2 д."
+            static let threeDays = "3 д."
+            static let fourDays = "4 д."
         }
     }
     
@@ -50,27 +63,48 @@ final class NotificationTableViewController: UITableViewController {
         case thisWeek(items: [Action])
     }
     
-    // MARK: - Private Property
+    // MARK: - Visual Component
     private let refresherControl = UIRefreshControl()
+    
+    // MARK: - Private Property
     private let tableCellTypes: [TableCellTypes] = [.today, .thisWeek]
     
-    private var users: [User] = [
-        User(name: Constans.NickNames.ilentiy, avatar: Constans.AvatarImageNames.ilentiy),
-        User(name: Constans.NickNames.mem, avatar: Constans.AvatarImageNames.mem),
-        User(name: Constans.NickNames.ledenev, avatar: Constans.AvatarImageNames.ledenev)
-    ]
+    private let ilentiy = User(name: Constans.NickNames.ilentiy, avatar: Constans.AvatarImageNames.ilentiy)
+    private let memolog = User(name: Constans.NickNames.mem, avatar: Constans.AvatarImageNames.mem)
+    private let ledenev = User(name: Constans.NickNames.ledenev, avatar: Constans.AvatarImageNames.ledenev)
     
     private lazy var todayActions: [Action] = [
-        Comment(user: users[1], action: Constans.ActionsText.comment1, post: "ledenevContent1", date: "2 ч."),
-        Comment(user: users[0], action: Constans.ActionsText.comment2, post: "ledenevAvatar", date: "5 ч."),
-        Comment(user: users[2], action: Constans.ActionsText.comment1, post: "ledenevContent1", date: "8 ч."),
-        Subcribe(user: users[0], action: Constans.ActionsText.subscribe, date: "5 ч.", isSubsribe: false)
+        Comment(user: ilentiy,
+                action: Constans.ActionsText.comment1,
+                post: Constans.AvatarImageNames.ledenevContent,
+                date: Constans.TimeStrings.threeHours),
+        Comment(user: memolog,
+                action: Constans.ActionsText.comment2,
+                post: Constans.AvatarImageNames.ledenev,
+                date: Constans.TimeStrings.fiveHours),
+        Comment(user: ledenev,
+                action: Constans.ActionsText.comment1,
+                post: Constans.AvatarImageNames.ledenevContent,
+                date: Constans.TimeStrings.nineHours),
+        Subcribe(user: ilentiy,
+                 action: Constans.ActionsText.subscribe,
+                 date: Constans.TimeStrings.nineHours,
+                 isSubsribe: false)
     ]
     
     private lazy var weekAction: [Action] = [
-        Subcribe(user: users[1], action: Constans.ActionsText.subscribe, date: "3 д.", isSubsribe: false),
-        Comment(user: users[0], action: Constans.ActionsText.comment2, post: "ledenevAvatar", date: "4 д."),
-        Subcribe(user: users[2], action: Constans.ActionsText.subscribe, date: "4 д.", isSubsribe: true)
+        Subcribe(user: memolog,
+                 action: Constans.ActionsText.subscribe,
+                 date: Constans.TimeStrings.twoDays,
+                 isSubsribe: false),
+        Comment(user: ledenev,
+                action: Constans.ActionsText.comment2,
+                post: Constans.AvatarImageNames.ledenevContent,
+                date: Constans.TimeStrings.fourDays),
+        Subcribe(user: ilentiy,
+                 action: Constans.ActionsText.subscribe,
+                 date: Constans.TimeStrings.fourDays,
+                 isSubsribe: true)
     ]
     
     lazy var actions = todayActions + weekAction
@@ -163,7 +197,6 @@ extension NotificationTableViewController {
         tableView.addSubview(refresherControl)
     }
     
-    // MARK: - Private Actions
     @objc private func refresherAction() {
         refresherControl.endRefreshing()
     }

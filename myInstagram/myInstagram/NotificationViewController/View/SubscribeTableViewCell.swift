@@ -11,9 +11,20 @@ import UIKit
 final class SubscribeTableViewCell: UITableViewCell {
     
     // MARK: - Private IBOutlets
-    @IBOutlet weak var actionLabel: UILabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var subscribeButton: UIButton!
+    @IBOutlet private weak var actionLabel: UILabel!
+    @IBOutlet private weak var avatarImageView: UIImageView!
+    @IBOutlet private weak var subscribeButton: UIButton!
+    
+    // MARK: - Public Methods
+    func updateData(_ item: Subcribe) {
+        actionLabel.attributedText =
+        NSMutableAttributedString()
+            .bold("\(item.user.name) ")
+            .normal("\(item.action) ")
+            .normalGray("\(item.date)")
+        avatarImageView.image = UIImage(named: item.user.avatar)
+        subscribe(isSubsribe: item.isSubsribe)
+    }
     
     // MARK: - Private Methods
     private func subscribe(isSubsribe: Bool) {
@@ -27,16 +38,5 @@ final class SubscribeTableViewCell: UITableViewCell {
             subscribeButton.tintColor = .tintColor
             subscribeButton.layer.borderWidth = 0
         }
-    }
-    
-    // MARK: - Public Methods
-    func updateData(_ item: Subcribe) {
-        actionLabel.attributedText =
-        NSMutableAttributedString()
-            .bold("\(item.user.name) ")
-            .normal("\(item.action) ")
-            .normalGray("\(item.date)")
-        avatarImageView.image = UIImage(named: item.user.avatar)
-        subscribe(isSubsribe: item.isSubsribe)
     }
 }
