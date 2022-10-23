@@ -8,7 +8,7 @@
 import UIKit
 
 /// Лента Инстаграма
-final class MainViewController: UIViewController {
+final class HomeViewController: UIViewController {
     
     // MARK: - Constants
     private enum Constants {
@@ -27,8 +27,10 @@ final class MainViewController: UIViewController {
     // MARK: - Private IBOutlets
     @IBOutlet private weak var intagramTableView: UITableView!
     
-    // MARK: - Private Property
+    // MARK: - Visual Component
     private let refresherControl = UIRefreshControl()
+    
+    // MARK: - Private Property
     private let tableCellTypes: [TableCellTypes] = [.story, .startPost, .recomend, .post]
     
     // MARK: - LifeCycle
@@ -50,7 +52,7 @@ final class MainViewController: UIViewController {
 }
 
 /// UITableViewDataSource
-extension MainViewController: UITableViewDataSource {
+extension HomeViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         tableCellTypes.count
     }

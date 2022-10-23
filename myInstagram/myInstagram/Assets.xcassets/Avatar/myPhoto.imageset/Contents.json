@@ -1,0 +1,15 @@
+{
+  "images" : [
+    {
+      "filename" : "photo_2022-10-19 03.01.40.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "original"
+  }
+}
