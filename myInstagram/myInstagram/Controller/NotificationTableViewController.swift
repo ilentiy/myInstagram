@@ -58,20 +58,21 @@ final class NotificationTableViewController: UITableViewController {
         case thisWeek
     }
     
-    private enum ActionsItem {
-        case today(items: [Action])
-        case thisWeek(items: [Action])
-    }
-    
-    // MARK: - Visual Component
-    private let refresherControl = UIRefreshControl()
-    
     // MARK: - Private Property
     private let tableCellTypes: [TableCellTypes] = [.today, .thisWeek]
     
-    private let ilentiy = User(name: Constans.NickNames.ilentiy, avatar: Constans.AvatarImageNames.ilentiy)
-    private let memolog = User(name: Constans.NickNames.mem, avatar: Constans.AvatarImageNames.mem)
-    private let ledenev = User(name: Constans.NickNames.ledenev, avatar: Constans.AvatarImageNames.ledenev)
+    private let ilentiy = User(name: Constans.NickNames.ilentiy,
+                               avatar: Constans.AvatarImageNames.ilentiy,
+                               mainInfo: nil,
+                               detailInfo: nil)
+    private let memolog = User(name: Constans.NickNames.mem,
+                               avatar: Constans.AvatarImageNames.mem,
+                               mainInfo: nil,
+                               detailInfo: nil)
+    private let ledenev = User(name: Constans.NickNames.ledenev,
+                               avatar: Constans.AvatarImageNames.ledenev,
+                               mainInfo: nil,
+                               detailInfo: nil)
     
     private lazy var todayActions: [Action] = [
         Comment(user: ilentiy,
@@ -139,6 +140,7 @@ extension NotificationTableViewController {
         header.textLabel?.text = header.textLabel?.text?.capitalizedSentence
         header.textLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         header.textLabel?.textColor = .label
+        header.backgroundColor = .systemBackground
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -152,12 +154,14 @@ extension NotificationTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let commentCell = tableView.dequeueReusableCell(withIdentifier: Constans.Identifiers.comment,
-                                                              for: indexPath) as? CommentTableViewCell
+        guard let commentCell = tableView.dequeueReusableCell(
+            withIdentifier: Constans.Identifiers.comment,
+            for: indexPath) as? CommentTableViewCell
         else { return UITableViewCell() }
         
-        guard let subscribeCell = tableView.dequeueReusableCell(withIdentifier: Constans.Identifiers.subscribe,
-                                                                for: indexPath) as? SubscribeTableViewCell
+        guard let subscribeCell = tableView.dequeueReusableCell(
+            withIdentifier: Constans.Identifiers.subscribe,
+            for: indexPath) as? SubscribeTableViewCell
         else { return UITableViewCell() }
         
         let type = tableCellTypes[indexPath.section]
@@ -193,11 +197,10 @@ extension NotificationTableViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        refresherControl.addTarget(self, action: #selector(refresherAction), for: .valueChanged)
-        tableView.addSubview(refresherControl)
+        refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
     }
     
-    @objc private func refresherAction() {
-        refresherControl.endRefreshing()
+    @objc private func refreshAction() {
+        refreshControl?.endRefreshing()
     }
 }

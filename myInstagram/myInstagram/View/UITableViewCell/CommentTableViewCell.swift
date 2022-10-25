@@ -25,5 +25,4 @@ final class CommentTableViewCell: UITableViewCell {
         avatarImageView.image = UIImage(named: item.user.avatar)
         postImageView.image = UIImage(named: item.post)
     }
-
 }

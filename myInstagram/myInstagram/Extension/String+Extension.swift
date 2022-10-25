@@ -10,6 +10,6 @@ import Foundation
 /// Расширение добавляет метод который делает первую букву предложения заглавной
 extension String {
     var capitalizedSentence: String {
-        "\(prefix(1).capitalized) \(dropFirst().lowercased())"
+        "\(prefix(1).capitalized)\(dropFirst().lowercased())"
     }
 }

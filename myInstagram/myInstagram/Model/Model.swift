@@ -14,13 +14,37 @@ protocol Action {
     var date: String { get set }
 }
 
-/// Модель пользователя
-struct User {
-    let name: String
-    let avatar: String
+/// Информация в шапке профиля
+struct MainInfo {
+    let post: String
+    let subscriber: String
+    let subscription: String
 }
 
-/// Модель комментария
+/// Дополнительная информация в шапке профиля
+struct DetailInfo {
+    let alias: String
+    let activity: String
+    let description: String
+}
+
+///  Хайлайт
+struct Hightlight {
+    let name: String
+    let imageName: String
+}
+
+/// Пользователь
+struct User {
+    var name: String
+    var avatar: String
+    var mainInfo: MainInfo?
+    var detailInfo: DetailInfo?
+    var hightlights: [Hightlight]?
+    var posts: [String]?
+}
+
+/// Комментарий
 struct Comment: Action {
     var user: User
     var action: String
@@ -28,7 +52,7 @@ struct Comment: Action {
     var date: String
 }
 
-/// Модель подписки
+/// Подписка
 struct Subcribe: Action {
     var user: User
     var action: String
