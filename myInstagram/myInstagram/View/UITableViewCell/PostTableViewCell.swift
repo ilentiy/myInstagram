@@ -9,10 +9,12 @@ import UIKit
 
 /// Прототип поста
 final class PostTableViewCell: UITableViewCell {
+    
     // MARK: - Constants
     enum Identifiers {
         static let post = "Post"
     }
+    
     // MARK: - Private IBOutlets
     @IBOutlet private weak var postCollectionView: UICollectionView!
     

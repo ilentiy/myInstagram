@@ -9,10 +9,12 @@ import UIKit
 
 /// Прототип Хайлатов
 final class HightlightTableViewCell: UITableViewCell {
-    // MARK: - COnstants
+    
+    // MARK: - Constants
     enum Identifiers {
         static let hightlights = "Highlight"
     }
+    
     // MARK: - Private IBOutlets
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -39,6 +41,3 @@ extension HightlightTableViewCell: UICollectionViewDataSource {
         return cell
     }
 }
-
-/// UICollectionViewDelegate
-extension HightlightTableViewCell: UICollectionViewDelegate {}

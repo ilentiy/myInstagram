@@ -58,9 +58,6 @@ final class NotificationTableViewController: UITableViewController {
         case thisWeek
     }
     
-    // MARK: - Visual Component
-    private let refresherControl = UIRefreshControl()
-    
     // MARK: - Private Property
     private let tableCellTypes: [TableCellTypes] = [.today, .thisWeek]
     
@@ -143,6 +140,7 @@ extension NotificationTableViewController {
         header.textLabel?.text = header.textLabel?.text?.capitalizedSentence
         header.textLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         header.textLabel?.textColor = .label
+        header.backgroundColor = .systemBackground
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -199,11 +197,10 @@ extension NotificationTableViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        refresherControl.addTarget(self, action: #selector(refresherAction), for: .valueChanged)
-        tableView.addSubview(refresherControl)
+        refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
     }
     
-    @objc private func refresherAction() {
-        refresherControl.endRefreshing()
+    @objc private func refreshAction() {
+        refreshControl?.endRefreshing()
     }
 }

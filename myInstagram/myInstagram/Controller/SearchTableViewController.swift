@@ -57,9 +57,6 @@ final class SearchTableViewController: UITableViewController {
         case posts
     }
     
-    // MARK: - Visual Component
-    private let refresherControl = UIRefreshControl()
-    
     // MARK: - Private Property
     private let tableCellTypes: [TableCellTypes] = [.profile, .detail, .hightlights, .posts]
     
@@ -74,6 +71,7 @@ final class SearchTableViewController: UITableViewController {
         Hightlight(name: Constans.AvatarImageNames.ledenev, imageName: Constans.AvatarImageNames.ledenev),
         Hightlight(name: Constans.AvatarImageNames.ledenevContent, imageName: Constans.AvatarImageNames.ledenevContent)
     ]
+    
     let posts = [
         Constans.AvatarImageNames.ilentiy,
         Constans.AvatarImageNames.mem,
@@ -94,9 +92,9 @@ final class SearchTableViewController: UITableViewController {
         name: UserInfo.Ilentiy.nickname,
         avatar: UserInfo.Ilentiy.avatarImageName,
         mainInfo: MainInfo(
-            posts: UserInfo.Ilentiy.posts,
-            subscribers: UserInfo.Ilentiy.subscribers,
-            subscriptions: UserInfo.Ilentiy.subscriptions
+            post: UserInfo.Ilentiy.posts,
+            subscriber: UserInfo.Ilentiy.subscribers,
+            subscription: UserInfo.Ilentiy.subscriptions
         ),
         detailInfo: DetailInfo(
             alias: UserInfo.Ilentiy.alias,
@@ -166,12 +164,11 @@ extension SearchTableViewController {
     
     // MARK: - Private Methods
     private func setupUI() {
-        refresherControl.addTarget(self, action: #selector(refresherAction), for: .valueChanged)
-        tableView.addSubview(refresherControl)
+        refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         navigationItem.title = ilentiy.name
     }
     
-    @objc private func refresherAction() {
-        refresherControl.endRefreshing()
+    @objc private func refreshAction() {
+        refreshControl?.endRefreshing()
     }
 }

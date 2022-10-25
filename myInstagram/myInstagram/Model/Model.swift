@@ -16,9 +16,9 @@ protocol Action {
 
 /// Информация в шапке профиля
 struct MainInfo {
-    let posts: String
-    let subscribers: String
-    let subscriptions: String
+    let post: String
+    let subscriber: String
+    let subscription: String
 }
 
 /// Дополнительная информация в шапке профиля

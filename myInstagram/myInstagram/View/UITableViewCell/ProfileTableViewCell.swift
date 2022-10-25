@@ -18,9 +18,9 @@ final class ProfileTableViewCell: UITableViewCell {
     
     // MARK: - Public Methods
     func updateData(_ user: User) {
-        postNumberLabel.text = user.mainInfo?.posts
-        subscribersNumberLabel.text = user.mainInfo?.subscribers
-        subscriptionsNumberLabel.text = user.mainInfo?.subscriptions
+        postNumberLabel.text = user.mainInfo?.post
+        subscribersNumberLabel.text = user.mainInfo?.subscriber
+        subscriptionsNumberLabel.text = user.mainInfo?.subscription
         avatarImageView.image = UIImage(named: user.avatar)
     }
 }
